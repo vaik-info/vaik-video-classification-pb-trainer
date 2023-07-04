@@ -18,7 +18,7 @@ def train(train_tfrecords_dir_path, test_tfrecords_dir_path, classes_txt_path, e
     TrainDataset = type(f'TrainDataset', (video_classification_dataset.VideoClassificationDataset,), dict())
     train_dataset = TrainDataset(train_tfrecords_dir_path, classes, split='train', frame_num=frame_num, skip_frame_ratio=skip_frame_ratio,
                                  input_size=(image_height, image_width, 3))
-    train_dataset = train_dataset.map(lambda x, y: (x, y), num_parallel_calls=tf.data.AUTOTUNE).padded_batch(batch_size=batch_size, padding_values=(
+    train_dataset = train_dataset.shuffle(128, reshuffle_each_iteration=True).padded_batch(batch_size=batch_size, padding_values=(
         tf.constant(0, dtype=tf.uint8), tf.constant(0, dtype=tf.int32)))
     # valid
     ValidDataset = type(f'ValidDataset', (video_classification_dataset.VideoClassificationDataset,), dict())
