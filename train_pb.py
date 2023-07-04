@@ -46,7 +46,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='train pb')
     parser.add_argument('--train_tfrecords_dir_path', type=str, default='~/.vaik-utc101-video-classification-dataset_tfrecords/train')
     parser.add_argument('--test_tfrecords_dir_path', type=str, default='~/.vaik-utc101-video-classification-dataset_tfrecords/test')
-    parser.add_argument('--classes_txt_path', type=str, default='~/.vaik-utc101-video-classification-dataset/ucf101_labels.txt')
+    parser.add_argument('--classes_txt_path', type=str, default='~/.vaik-utc101-video-classification-dataset_tfrecords/train/ucf101_labels.txt')
     parser.add_argument('--epochs', type=int, default=20)
     parser.add_argument('--step_size', type=int, default=1000)
     parser.add_argument('--batch_size', type=int, default=8)
