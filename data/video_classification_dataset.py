@@ -38,7 +38,6 @@ class VideoClassificationDataset:
     def _generator(cls):
         step_index = 0
         while True:
-            cls.parsed_dataset = cls.parsed_dataset.shuffle(32)
             for parsed_data in cls.parsed_dataset:
                 step_index += 1
                 if cls.max_sample_num is not None and cls.max_sample_num < step_index:
