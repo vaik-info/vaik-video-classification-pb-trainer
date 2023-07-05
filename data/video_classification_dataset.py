@@ -27,6 +27,7 @@ class VideoClassificationDataset:
         cls.parsed_dataset = cls.__load_tfrecords(tfrecords_dir_path)
         cls.output_signature = (tf.TensorSpec(name=f'video', shape=(frame_num,) + input_size, dtype=tf.uint8),
                                 tf.TensorSpec(name=f'class_index', shape=(), dtype=tf.int32))
+
         dataset = tf.data.Dataset.from_generator(
             cls._generator,
             output_signature=cls.output_signature
@@ -37,13 +38,15 @@ class VideoClassificationDataset:
     def _generator(cls):
         step_index = 0
         while True:
+            cls.parsed_dataset = cls.parsed_dataset.shuffle(256)
             for parsed_data in cls.parsed_dataset:
                 step_index += 1
                 if cls.max_sample_num is not None and cls.max_sample_num < step_index:
                     return
                 video, class_index = parsed_data
                 video_array = np.zeros((cls.frame_num, ) + cls.input_size, dtype=np.uint8)
-                video = video[::random.choice(cls.skip_frame_ratio)]
+                random_skip_frame_ratio = random.choice(cls.skip_frame_ratio)
+                video = video[::random_skip_frame_ratio]
                 start_frame = random.randint(0, max(1, video.shape[0]-cls.frame_num))
                 video = video[start_frame:min(start_frame+cls.frame_num, video.shape[0])]
                 video = tf.image.resize_with_crop_or_pad(video, max(video.shape[1:3]), max(video.shape[1:3]))

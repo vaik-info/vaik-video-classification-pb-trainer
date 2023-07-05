@@ -18,7 +18,7 @@ def train(train_tfrecords_dir_path, test_tfrecords_dir_path, classes_txt_path, e
     TrainDataset = type(f'TrainDataset', (video_classification_dataset.VideoClassificationDataset,), dict())
     train_dataset = TrainDataset(train_tfrecords_dir_path, classes, split='train', frame_num=frame_num, skip_frame_ratio=skip_frame_ratio,
                                  input_size=(image_height, image_width, 3))
-    train_dataset = train_dataset.shuffle(128, reshuffle_each_iteration=True).padded_batch(batch_size=batch_size, padding_values=(
+    train_dataset = train_dataset.padded_batch(batch_size=batch_size, padding_values=(
         tf.constant(0, dtype=tf.uint8), tf.constant(0, dtype=tf.int32)))
     # valid
     ValidDataset = type(f'ValidDataset', (video_classification_dataset.VideoClassificationDataset,), dict())
@@ -47,15 +47,15 @@ if __name__ == '__main__':
     parser.add_argument('--train_tfrecords_dir_path', type=str, default='~/.vaik-utc101-video-classification-dataset_tfrecords/train')
     parser.add_argument('--test_tfrecords_dir_path', type=str, default='~/.vaik-utc101-video-classification-dataset_tfrecords/test')
     parser.add_argument('--classes_txt_path', type=str, default='~/.vaik-utc101-video-classification-dataset_tfrecords/train/ucf101_labels.txt')
-    parser.add_argument('--epochs', type=int, default=20)
+    parser.add_argument('--epochs', type=int, default=40)
     parser.add_argument('--step_size', type=int, default=1000)
     parser.add_argument('--batch_size', type=int, default=8)
     parser.add_argument('--frame_num', type=int, default=16)
     parser.add_argument('--image_height', type=int, default=224)
     parser.add_argument('--image_width', type=int, default=224)
     parser.add_argument('--skip_frame_ratio', nargs='+', type=int, default=(1, 2, 4))
-    parser.add_argument('--test_sample_num', type=int, default=200)
-    parser.add_argument('--output_dir_path', type=str, default='~/.video-classification-pb-trainer/output_model')
+    parser.add_argument('--test_sample_num', type=int, default=500)
+    parser.add_argument('--output_dir_path', type=str, default='~/.vaik-video-classification-pb-trainer/output_model')
     args = parser.parse_args()
 
     args.train_tfrecords_dir_path = os.path.expanduser(args.train_tfrecords_dir_path)
