@@ -53,7 +53,7 @@ if __name__ == '__main__':
     parser.add_argument('--frame_num', type=int, default=16)
     parser.add_argument('--image_height', type=int, default=224)
     parser.add_argument('--image_width', type=int, default=224)
-    parser.add_argument('--skip_frame_ratio', nargs='+', type=int, default=(1, 2, 4))
+    parser.add_argument('--skip_frame_ratio', nargs='+', type=int, default=(1, 2, 4, 8, 16))
     parser.add_argument('--test_sample_num', type=int, default=500)
     parser.add_argument('--output_dir_path', type=str, default='~/.vaik-video-classification-pb-trainer/output_model')
     args = parser.parse_args()
