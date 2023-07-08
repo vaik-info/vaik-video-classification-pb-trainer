@@ -12,8 +12,8 @@ python train_pb.py --train_tfrecords_dir_path ~/.vaik-utc101-video-classificatio
                 --classes_txt_path ~/.vaik-utc101-video-classification-dataset_tfrecords/train/ucf101_labels.txt \
                 --epochs 20 \
                 --step_size 1000 \
-                --frame_num 8 \
-                --batch_size 16 \
+                --frame_num 16 \
+                --batch_size 8 \
                 --image_height 224 \
                 --image_width 224 \
                 --skip_frame_ratio 1,2,4 \
