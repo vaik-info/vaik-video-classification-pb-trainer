@@ -16,7 +16,7 @@ python train_pb.py --train_tfrecords_dir_path ~/.vaik-utc101-video-classificatio
                 --batch_size 8 \
                 --image_height 224 \
                 --image_width 224 \
-                --skip_frame_ratio 1,2,4 \
+                --skip_frame_ratio 1,2,4,8,16 \
                 --test_sample_num 200 \
                 --output_dir_path '~/.vaik-video-classification-pb-trainer/output_model'        
 ```
