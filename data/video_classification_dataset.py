@@ -3,7 +3,6 @@ import glob
 import os
 
 import tqdm
-import imageio
 import numpy as np
 import tensorflow as tf
 
